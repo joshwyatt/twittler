@@ -11,10 +11,10 @@ streams.users.shawndrost = [];
 streams.users.sharksforcheap = [];
 streams.users.mracus = [];
 streams.users.douglascalhoun = [];
-// Get and instantiate current user's username.
-username = prompt('Please enter your username');
-if (username !== '') {
-  window.streams.users[username] = [];
+// Get and instantiate current user's username if one is entered.
+visitor = prompt('Please enter your username');
+if (visitor !== '') {
+  streams.users[visitor] = [];
   var exceptUser = 1;
 }
 window.users = Object.keys(streams.users);
