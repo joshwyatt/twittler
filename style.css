@@ -10,8 +10,6 @@ body {
 	text-shadow: 2px 2px 2px #aaa;
 }
 
-.header {
-	text-align: center;
-	font-size: 20px;
-	font-style: bold;
+.tweet {
+	display: none;
 }
