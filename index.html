@@ -4,16 +4,31 @@
     <script src="jquery.js"></script>
     <script src="moment.min.js"></script>
     <script src="data_generator.js"></script>
+    <title>Twiddler</title>
   </head>
   <body>
 
-    <p>Tweet: 
-      <input class="write_tweet" type="text" />
-      <button class="submit_tweet">submit</button>
-    </p>
-    <button class="refresh">refresh</button>
-    <button class="feed">run/pause feed</button>
-    <div class="tweets"></div>
+    <div class="header">
+      <ul>
+        <li>Login/Sign Up</li>
+      </ul>
+    </div>
+    
+    <div class="title">
+      <h1>Twiddler</h1>
+    </div>
+
+    <div class="console">
+      <p>Twiddle: 
+        <input class="write_tweet" type="text" />
+        <button class="submit_tweet">submit</button>
+        <button class="refresh">refresh</button>
+        <button class="stream">stream/pause</button>
+      </p>
+    </div>
+    
+    <div class="tweets">
+    </div>
 
     <script>
 
@@ -46,7 +61,7 @@
         $('.refresh').on('click', fetchAndDisplayTweets);
 
         // Display tweets at interval / pause on 'run' button click. LATER: allow user-defined interval.
-        $('.feed').on('click', function() {
+        $('.stream').on('click', function() {
           if (!interval) {
             interval = true;
             fetchAndDisplayTweets();
