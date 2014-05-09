@@ -2,19 +2,22 @@
 <html>
   <head>
     <script src="jquery.js"></script>
+    <script src="moment.min.js"></script>
     <script src="data_generator.js"></script>
   </head>
   <body>
 
     <button class="refresh">refresh</button>
     <button class="feed">run/pause feed</button>
+    <input class="refresh_rate" type="number" name="refresh_rate" min="1" value="5" />
     <div class="tweets"></div>
 
     <script>
 
       $(document).ready(function(){
 
-        // Fetch all tweets from data_generator.js and append them to $('.tweets').
+
+        // Function to fetch all tweets from data_generator.js and append them to $('.tweets').
         var fetchAndDisplayTweets = function() {
           var $tweets = $('.tweets');
           $tweets.html('');
@@ -23,33 +26,36 @@
           while(index >= 0){
             var tweet = streams.home[index];
             var $tweet = $('<div></div>');
-            $tweet.text('@' + tweet.user + ': ' + tweet.message);
+            $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + moment().format("dddd, MMMM Do YYYY, h:mm:ss a"));
             $tweet.appendTo($tweets);
             index -= 1;
           }
         };
 
+
+        // Fetch and display tweets on 'refresh' button click.
+        $('.refresh').on('click', fetchAndDisplayTweets);
+
+        // Set initial variables.
         var interval, autoDisplayTweets;
 
         // Inital display of tweets on page load.
         fetchAndDisplayTweets();
-
-        // Fetch and display tweets on 'refresh' button click.
-        $('.refresh').on('click', fetchAndDisplayTweets);
 
         // Display tweets at interval / pause on 'run' button click. LATER: allow user-defined interval.
         $('.feed').on('click', function() {
           if (!interval) {
             interval = true;
             fetchAndDisplayTweets();
-            autoDisplayTweets = setInterval(fetchAndDisplayTweets, 2000);
+            autoDisplayTweets = setInterval(fetchAndDisplayTweets, undefined);
           } else {
             interval = false;
             clearInterval(autoDisplayTweets);
           }
         });
-        // var autoDisplayTweets = setInterval(fetchAndDisplayTweets, 2000);
-        // clearInterval(autoDisplayTweets);
+
+
+
 
       });
 
