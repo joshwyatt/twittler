@@ -80,7 +80,7 @@ $(document).ready(function() {
 
   $('.submit_tweet').on('click', function() {
     var currentTweet = $('.write_tweet').val();
-    if (currentTweet.message == undefined) {
+    if (currentTweet == '') {
       throw new Error('tweets cannot be empty!');
     }
     writeTweet(currentTweet);
