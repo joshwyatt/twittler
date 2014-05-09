@@ -7,14 +7,14 @@
   <body>
 
     <button class="refresh">refresh</button>
-    <button class="feed">run feed</button>
+    <button class="feed">run/pause feed</button>
     <div class="tweets"></div>
 
     <script>
 
       $(document).ready(function(){
 
-        // Fetch all tweets from data_generator.js and append them to $body
+        // Fetch all tweets from data_generator.js and append them to $('.tweets').
         var fetchAndDisplayTweets = function() {
           var $tweets = $('.tweets');
           $tweets.html('');
@@ -29,11 +29,26 @@
           }
         };
 
-        // Inital display of tweets on page load
+        var interval, autoDisplayTweets;
+
+        // Inital display of tweets on page load.
         fetchAndDisplayTweets();
 
-        // Display tweets at interval. LATER: allow user-defined interval.
-        var autoDisplayTweets = setInterval(fetchAndDisplayTweets, 2000);
+        // Fetch and display tweets on 'refresh' button click.
+        $('.refresh').on('click', fetchAndDisplayTweets);
+
+        // Display tweets at interval / pause on 'run' button click. LATER: allow user-defined interval.
+        $('.feed').on('click', function() {
+          if (!interval) {
+            interval = true;
+            fetchAndDisplayTweets();
+            autoDisplayTweets = setInterval(fetchAndDisplayTweets, 2000);
+          } else {
+            interval = false;
+            clearInterval(autoDisplayTweets);
+          }
+        });
+        // var autoDisplayTweets = setInterval(fetchAndDisplayTweets, 2000);
         // clearInterval(autoDisplayTweets);
 
       });
