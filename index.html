@@ -9,22 +9,27 @@
     <title>Twiddler</title>
   </head>
   <body>
-
-    <div class="header">
-      <p>Login / Sign Up</p>
-    </div>
     
     <div class="title">
       <h1>Twiddler</h1>
     </div>
 
     <div class="console">
-      <p>Twiddle: 
-        <input class="write_tweet" type="text" />
-        <button class="submit_tweet">submit</button>
+      <div>
+        <span class="login">Enter username to login or sign up!
+          <input class="write_username" type="text" />
+          <button class="submit_username">submit</button>
+        </span>
+        <span class="tweet">Twiddle: 
+          <input class="write_tweet" type="text" />
+          <button class="submit_tweet">submit</button>
+        </span>
+      </div>
+
+      <div>
         <button class="refresh">refresh</button>
         <button class="stream">stream/pause</button>
-      </p>
+      </div>
     </div>
     
     <div class="tweets">
