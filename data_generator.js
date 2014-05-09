@@ -12,13 +12,6 @@ $(document).ready(function() {
   streams.users.sharksforcheap = [];
   streams.users.mracus = [];
   streams.users.douglascalhoun = [];
-  // Get and instantiate current user's username if one is entered.
-  // var visitor = prompt('Please enter your username');
-  var visitor = 'jDub';
-  if (visitor !== '') {
-    streams.users[visitor] = [];
-    var exceptUser = 1;
-  }
   window.users = Object.keys(streams.users);
 
   // utility function for adding tweets to our data structures
@@ -50,7 +43,7 @@ $(document).ready(function() {
   // generate random tweets on a random schedule
   var generateRandomTweet = function(){
     var tweet = {};
-    tweet.user = randomElement(users, exceptUser);
+    tweet.user = randomElement(users, exceptUserFromRandomTwiddles);
     tweet.message = randomMessage();
     tweet.created_at = moment();
     addTweet(tweet);
@@ -77,6 +70,22 @@ $(document).ready(function() {
     tweet.message = message;
     addTweet(tweet);
   };
+
+  var exceptUserFromRandomTweets;
+
+    $('.submit_username').on('click', function() {
+    var checkVisitor = $('.write_username').val();
+    if (checkVisitor == '') {
+      throw new Error('username cannot be empty!');
+    }
+    visitor = checkVisitor;
+    $('.login').toggle();
+    $('.tweet').toggle();
+    exceptUserFromRandomTweets = 1;
+    streams.users[visitor] = [];
+    window.users = Object.keys(streams.users);
+    return visitor;
+  });
 
   $('.submit_tweet').on('click', function() {
     var currentTweet = $('.write_tweet').val();
