@@ -13,7 +13,10 @@ streams.users.mracus = [];
 streams.users.douglascalhoun = [];
 // Get and instantiate current user's username.
 username = prompt('Please enter your username');
-window.streams.users[username] = [];
+if (username !== '') {
+  window.streams.users[username] = [];
+  var exceptUser = 1;
+}
 window.users = Object.keys(streams.users);
 
 // utility function for adding tweets to our data structures
@@ -45,7 +48,7 @@ var randomMessage = function(){
 // generate random tweets on a random schedule
 var generateRandomTweet = function(){
   var tweet = {};
-  tweet.user = randomElement(users, 1);
+  tweet.user = randomElement(users, exceptUser);
   tweet.message = randomMessage();
   tweet.created_at = moment();
   addTweet(tweet);
