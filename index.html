@@ -7,6 +7,10 @@
   </head>
   <body>
 
+    <p>Tweet: 
+      <input class="write_tweet" type="text" />
+      <button class="submit_tweet">submit</button>
+    </p>
     <button class="refresh">refresh</button>
     <button class="feed">run/pause feed</button>
     <input class="refresh_rate" type="number" name="refresh_rate" min="1" value="5" />
@@ -32,15 +36,14 @@
           }
         };
 
-
-        // Fetch and display tweets on 'refresh' button click.
-        $('.refresh').on('click', fetchAndDisplayTweets);
-
         // Set initial variables.
         var interval, autoDisplayTweets;
 
         // Inital display of tweets on page load.
         fetchAndDisplayTweets();
+
+        // Fetch and display tweets on 'refresh' button click.
+        $('.refresh').on('click', fetchAndDisplayTweets);
 
         // Display tweets at interval / pause on 'run' button click. LATER: allow user-defined interval.
         $('.feed').on('click', function() {
@@ -53,9 +56,6 @@
             clearInterval(autoDisplayTweets);
           }
         });
-
-
-
 
       });
 
