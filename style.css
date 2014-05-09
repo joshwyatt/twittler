@@ -1,0 +1,17 @@
+body {
+	font-family: 'Open Sans Condensed', 'sans-serif';
+}
+
+.title {
+	text-align: center;
+	font-family: 'Kaushan Script', 'cursive';
+	font-size: 45px;
+	font-style: italic;
+	text-shadow: 2px 2px 2px #aaa;
+}
+
+.header {
+	text-align: center;
+	font-size: 20px;
+	font-style: bold;
+}
