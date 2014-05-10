@@ -18,10 +18,18 @@ body {
 }
 
 .displayTweets {
-	border: 1px solid red;
+	border: 2px solid red;
 	background: white;
 	padding: 10px;
 	border-radius: 5px;
 	height: 420px;
 	overflow: scroll;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.created {
+	color: gray;
 }
