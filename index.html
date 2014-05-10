@@ -38,6 +38,13 @@
     <div class="displayTweets">
     </div>
 
+    <div class="footer">
+      <i class="fa fa-github-square fa-3x"></i>
+      <i class="fa fa-twitter-square fa-3x"></i>
+      <i class="fa fa-facebook-square fa-3x"></i>
+      <i class="fa fa-pinterest-square fa-3x"></i>
+    </div>
+
     <script>
 
       $(document).ready(function(){
@@ -63,15 +70,14 @@
           }
         };
 
-        // Function to toggle animation effects by changing css class.
-        var mouseHighlight = function($element) {
-          $element.on('mouseover', function() {
-            $(this).toggleClass('highlight');
-          });
-          $element.on('mouseleave', function() {
-            $(this).toggleClass('highlight');
-          });
-        }
+        // Toggle icon opacity of mouseover/mouseleave.
+        $('i').on('mouseover', function() {
+          $(this).toggleClass('highlight');
+        });
+        $('i').on('mouseleave', function() {
+          $(this).toggleClass('highlight');
+        });
+
 
         // Function to toggle display of 2 elements.
         var toggleElements = function ($elementToHide, $elementToShow, speed) {
@@ -83,16 +89,12 @@
         var $stream = $('.stream');
         var $pause = $('.pause');
         var $submit_username = $('.submit_username');
-        mouseHighlight($refresh);
-        mouseHighlight($stream);
-        mouseHighlight($pause);
-        mouseHighlight($submit_username);
 
         // Set initial variables.
         var interval, autoDisplayTweets;
 
-        // Inital display of tweets and setting of focus on page load.
-        fetchAndDisplayTweets();
+        // Inital display of tweet stream and setting of focus on page load.
+        autoDisplayTweets = setInterval(fetchAndDisplayTweets, undefined);
         $('.write_username').focus();
 
         // Fetch and display tweets on 'refresh' button click.
