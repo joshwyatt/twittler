@@ -77,7 +77,7 @@ $(document).ready(function() {
 
   // Creates username data for user-inputed username, hides 
   // form field and replaces with tweet submission field.
-  $('.submit_username').on('click', function() {
+  var submitUsername = function() {
     var checkVisitor = $('.write_username').val();
     if (checkVisitor == '') {
       throw new Error('username cannot be empty!');
@@ -89,6 +89,13 @@ $(document).ready(function() {
     streams.users[visitor] = [];
     window.users = Object.keys(streams.users);
     return visitor;
+  };
+
+  $('.submit_username').on('click', submitUsername);
+  $('.write_username').keyup(function(e) {
+    if (e.keyCode === 13) {
+      submitUsername();
+    }
   });
 
   // Submits tweet for display on user click.
