@@ -40,10 +40,14 @@ $(document).ready(function() {
     return [randomElement(opening), randomElement(verbs), randomElement(objects), randomElement(nouns), randomElement(tags)].join(' ');
   };
 
+  // Set exceptUserFromRandomTweets so that when a user is created, it can be
+  // modified so that the username is not used for generating random tweets.
+  var exceptUserFromRandomTweets;
+
   // generate random tweets on a random schedule
   var generateRandomTweet = function(){
     var tweet = {};
-    tweet.user = randomElement(users, exceptUserFromRandomTwiddles);
+    tweet.user = randomElement(users, exceptUserFromRandomTweets);
     tweet.message = randomMessage();
     tweet.created_at = moment();
     addTweet(tweet);
@@ -71,9 +75,9 @@ $(document).ready(function() {
     addTweet(tweet);
   };
 
-  var exceptUserFromRandomTweets;
-
-    $('.submit_username').on('click', function() {
+  // Creates username data for user-inputed username, hides 
+  // form field and replaces with tweet submission field.
+  $('.submit_username').on('click', function() {
     var checkVisitor = $('.write_username').val();
     if (checkVisitor == '') {
       throw new Error('username cannot be empty!');
@@ -87,6 +91,7 @@ $(document).ready(function() {
     return visitor;
   });
 
+  // Submits tweet for display on user click.
   $('.submit_tweet').on('click', function() {
     var currentTweet = $('.write_tweet').val();
     if (currentTweet == '') {
