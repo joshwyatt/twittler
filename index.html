@@ -39,10 +39,9 @@
     </div>
 
     <div class="footer">
-      <i class="fa fa-github-square fa-3x"></i>
-      <i class="fa fa-twitter-square fa-3x"></i>
-      <i class="fa fa-facebook-square fa-3x"></i>
-      <i class="fa fa-pinterest-square fa-3x"></i>
+      <a href="https://github.com" target="_blank"><i class="fa fa-github-square fa-3x"></i></a>
+      <a href="https://twitter.com" target="_blank"><i class="fa fa-twitter-square fa-3x"></i></a>
+      <a href="https://pinterest.com" target="_blank"><i class="fa fa-pinterest-square fa-3x"></i></a>
     </div>
 
     <script>
@@ -103,7 +102,7 @@
         // Display tweets at interval / pause on 'run' button click. LATER: allow user-defined interval.
         $stream.on('click', function() {
           interval = true;
-          toggleElements($stream, $pause, 'slow');
+          toggleElements($stream, $pause);
           fetchAndDisplayTweets();
           autoDisplayTweets = setInterval(fetchAndDisplayTweets, undefined);
         });
