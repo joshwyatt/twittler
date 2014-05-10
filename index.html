@@ -28,6 +28,7 @@
       <div class="controls">
         <i class="fa fa-refresh fa-2x refresh"></i>
         <i class="fa fa-play fa-2x stream"></i>
+        <i class="fa fa-pause fa-2x pause"></i>
       </div>
     </div>
     
@@ -59,6 +60,7 @@
           }
         };
 
+        // Function to toggle animation effects by changing css class.
         var mouseHighlight = function($element) {
           $element.on('mouseover', function() {
             $(this).toggleClass('highlight');
@@ -68,11 +70,19 @@
           });
         }
 
+        // Function to toggle display of 2 elements.
+        var toggleElements = function ($elementToHide, $elementToShow, speed) {
+          $elementToHide.toggle();
+          $elementToShow.toggle(speed);
+        };
+
         var $refresh = $('.refresh');
         var $stream = $('.stream');
+        var $pause = $('.pause');
         var $submit_username = $('.submit_username');
         mouseHighlight($refresh);
         mouseHighlight($stream);
+        mouseHighlight($pause);
         mouseHighlight($submit_username);
 
         // Set initial variables.
@@ -83,18 +93,20 @@
         $('.write_username').focus();
 
         // Fetch and display tweets on 'refresh' button click.
-        $('.refresh').on('click', fetchAndDisplayTweets);
+        $refresh.on('click', fetchAndDisplayTweets);
 
         // Display tweets at interval / pause on 'run' button click. LATER: allow user-defined interval.
-        $('.stream').on('click', function() {
-          if (!interval) {
-            interval = true;
-            fetchAndDisplayTweets();
-            autoDisplayTweets = setInterval(fetchAndDisplayTweets, undefined);
-          } else {
-            interval = false;
-            clearInterval(autoDisplayTweets);
-          }
+        $stream.on('click', function() {
+          interval = true;
+          toggleElements($stream, $pause, 'slow');
+          fetchAndDisplayTweets();
+          autoDisplayTweets = setInterval(fetchAndDisplayTweets, undefined);
+        });
+          
+        $pause.on('click', function() {
+          interval = false;
+          toggleElements($pause, $stream);
+          clearInterval(autoDisplayTweets);
         });
 
       });
