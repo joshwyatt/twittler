@@ -52,6 +52,7 @@
         // Set initial variables.
         window.visitor;
         var interval, autoDisplayTweets;
+        var $displayTweets = $('.displayTweets');
         var $refresh = $('.refresh');
         var $stream = $('.stream');
         var $pause = $('.pause');
@@ -59,15 +60,23 @@
         var $submit_tweet = $('.submit_tweet');
         var $write_tweet = $('.write_tweet');
         var $write_username = $('.write_username');
+        var nameToDisplay = 'shawndrost';
         
         // Function to fetch all tweets from data_generator.js and append them to $('.tweets').
         var fetchAndDisplayTweets = function() {
-          var $displayTweets = $('.displayTweets');
           $displayTweets.html('');
+          if (nameToDisplay === 'home') {
+            var index = streams[nameToDisplay].length - 1;
+          } else {
+            var index = streams.users[nameToDisplay].length - 1;
+          }
 
-          var index = streams.home.length - 1;
           while(index >= 0){
-            var tweet = streams.home[index];
+            if (nameToDisplay === 'home') {
+              var tweet = streams[nameToDisplay][index];
+            } else {
+              var tweet = streams.users[nameToDisplay][index];
+            }
             var $tweet = $('<div></div>');
 
             $tweet.html('<span class="bold">@' + tweet.user + ': </span>' + tweet.message + ' -- ' + '<span class="created">' + moment(tweet.created_at).fromNow() + '</span>');
