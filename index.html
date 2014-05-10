@@ -23,11 +23,10 @@
         </span>
         <span class="tweet">Twiddle: 
           <input class="write_tweet" type="text" size="85"/>
-          <button class="submit_tweet">submit</button>
         </span>
       </div>
       <div class="controls">
-        <i class="fa fa-refresh fa-2x refresh">    </i>
+        <i class="fa fa-refresh fa-2x refresh"></i>
         <i class="fa fa-play fa-2x stream"></i>
       </div>
     </div>
@@ -60,11 +59,28 @@
           }
         };
 
+        var mouseHighlight = function($element) {
+          $element.on('mouseover', function() {
+            $(this).toggleClass('highlight');
+          });
+          $element.on('mouseleave', function() {
+            $(this).toggleClass('highlight');
+          });
+        }
+
+        var $refresh = $('.refresh');
+        var $stream = $('.stream');
+        var $submit_username = $('.submit_username');
+        mouseHighlight($refresh);
+        mouseHighlight($stream);
+        mouseHighlight($submit_username);
+
         // Set initial variables.
         var interval, autoDisplayTweets;
 
-        // Inital display of tweets on page load.
+        // Inital display of tweets and setting of focus on page load.
         fetchAndDisplayTweets();
+        $('.write_username').focus();
 
         // Fetch and display tweets on 'refresh' button click.
         $('.refresh').on('click', fetchAndDisplayTweets);

@@ -21,7 +21,7 @@ body {
 	border: 2px solid purple;
 	background: white;
 	padding: 10px;
-	margin-top: 80px;
+	margin-top: 90px;
 	border-radius: 5px;
 	height: 420px;
 	overflow: scroll;
@@ -51,4 +51,35 @@ body {
 
 .created {
 	color: gray;
+}
+
+i {
+	opacity: 0.6;
+}
+
+.highlight {
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+	opacity: 1;
+}
+
+input {
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #DDDDDD;
+}
+
+input:focus {
+	outline: none !important;
+  box-shadow: 0 0 5px purple;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid purple;
 }
