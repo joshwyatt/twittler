@@ -2,6 +2,7 @@ body {
 	font-family: 'Open Sans Condensed', 'sans-serif';
 	line-height: 1.3em;
 	background-image: url('images/extra_clean_paper.png');
+	margin: 10px;
 }
 
 .title {
@@ -20,13 +21,27 @@ body {
 	border: 2px solid purple;
 	background: white;
 	padding: 10px;
+	margin-top: 80px;
 	border-radius: 5px;
 	height: 420px;
 	overflow: scroll;
 	box-shadow: 0px 0px 20px 1px black;
+	clear: both;
 }
 .console {
-	margin: 10px;
+	float: left;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+.controls {
+	float: right;
+	margin-right: 30px;
+	margin-bottom: 10px;
+}
+
+.refresh {
+	padding-right: 15px;
 }
 
 .bold {
