@@ -1,5 +1,8 @@
 body {
 	font-family: 'Open Sans Condensed', 'sans-serif';
+	line-height: 1.7em;
+	font-size: 1.2em;
+	background-image: url('images/extra_clean_paper.png');
 }
 
 .title {
@@ -12,4 +15,13 @@ body {
 
 .tweet {
 	display: none;
+}
+
+.displayTweets {
+	border: 1px solid red;
+	background: white;
+	padding: 10px;
+	border-radius: 5px;
+	height: 420px;
+	overflow: scroll;
 }
