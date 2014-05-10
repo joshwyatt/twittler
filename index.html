@@ -2,6 +2,7 @@
 <html>
   <head>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700|Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet" type="text/css">
     <script src="jquery.js"></script>
     <script src="moment.min.js"></script>
@@ -16,16 +17,15 @@
 
     <div class="console">
       <div>
-        <span class="login">Enter username to login or sign up!
+        <span class="login bold">Enter username to login or sign up!
           <input class="write_username" type="text" />
           <button class="submit_username">submit</button>
         </span>
         <span class="tweet">Twiddle: 
-          <input class="write_tweet" type="text" />
+          <input class="write_tweet" type="text" size="200"/>
           <button class="submit_tweet">submit</button>
         </span>
       </div>
-
       <div>
         <button class="refresh">refresh</button>
         <button class="stream">stream/pause</button>
@@ -53,9 +53,9 @@
             $tweet.html('<span class="bold">@' + tweet.user + ': </span>' + tweet.message + ' -- ' + '<span class="created">' + moment(tweet.created_at).fromNow() + '</span>');
             $tweet.appendTo($displayTweets);
             index -= 1;
-            $displayTweets.html(function(i, element) {
+            $tweet.html(function(i, element) {
               var hashTag = element.match(/#\S*/);
-              return element.replace(/#\S*/g, '<span class="bold">' + hashTag + '</span>');
+              return element.replace(/#\S*/, '<span class="bold">' + hashTag + '</span>');
             });
           }
         };
