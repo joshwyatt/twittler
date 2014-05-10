@@ -5,6 +5,10 @@ body {
 	margin: 10px;
 }
 
+.tweet, .stream, .refresh {
+	display: none;
+}
+
 .title {
 	font-family: 'Kaushan Script', 'cursive';
 	font-size: 35px;
@@ -18,10 +22,6 @@ body {
 	left: 25%;
 	top: 9px;
 
-}
-
-.tweet, .stream {
-	display: none;
 }
 
 .displayTweets {

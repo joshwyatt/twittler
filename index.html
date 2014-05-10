@@ -26,6 +26,7 @@
         </span>
         <span class="tweet">Twiddle: 
           <input class="write_tweet" type="text" size="85"/>
+          <i class="fa fa-plus-square fa-lg submit_tweet"></i>
         </span>
       </div>
       <div class="controls">
@@ -48,7 +49,17 @@
 
       $(document).ready(function(){
 
-
+        // Set initial variables.
+        window.visitor;
+        var interval, autoDisplayTweets;
+        var $refresh = $('.refresh');
+        var $stream = $('.stream');
+        var $pause = $('.pause');
+        var $submit_username = $('.submit_username');
+        var $submit_tweet = $('.submit_tweet');
+        var $write_tweet = $('.write_tweet');
+        var $write_username = $('.write_username');
+        
         // Function to fetch all tweets from data_generator.js and append them to $('.tweets').
         var fetchAndDisplayTweets = function() {
           var $displayTweets = $('.displayTweets');
@@ -69,7 +80,43 @@
           }
         };
 
-        // Toggle icon opacity of mouseover/mouseleave.
+        // Helper function to toggle display of 2 elements.
+        var toggleElements = function ($elementToHide, $elementToShow, speed) {
+          $elementToHide.toggle();
+          $elementToShow.toggle(speed);
+        };
+
+        // Function to create username data for user-inputed username, hides 
+        // form field and replaces with tweet submission field.
+        var submitUsername = function() {
+          var checkVisitor = $write_username.val();
+          if (checkVisitor == '') {
+            throw new Error('username cannot be empty!');
+          }
+          visitor = checkVisitor;
+          $('.login').toggle();
+          $('.tweet').toggle();
+          $write_tweet.focus();
+          exceptUserFromRandomTweets = 1;
+          streams.users[visitor] = [];
+          window.users = Object.keys(streams.users);
+        };
+
+        // Function to submit tweet for display on user click.
+        var submitTweet = function() {
+          var currentTweet = $write_tweet.val();
+          if (currentTweet == '') {
+            throw new Error('tweets cannot be empty!');
+          }
+          writeTweet(currentTweet);
+          $write_tweet.val('');
+        }
+
+        // Inital display of tweet stream and setting of focus on page load.
+        autoDisplayTweets = setInterval(fetchAndDisplayTweets, undefined);
+        $write_username.focus();
+
+        // Set icons to toggle opacity on mouseover/mouseleave.
         $('i').on('mouseover', function() {
           $(this).toggleClass('highlight');
         });
@@ -77,38 +124,38 @@
           $(this).toggleClass('highlight');
         });
 
+        // Set username on .submit_username click, or return keyup.
+        $submit_username.on('click', submitUsername);
+        $write_username.keyup(function(e) {
+          if (e.keyCode === 13) {
+            submitUsername();
+          }
+        });
 
-        // Function to toggle display of 2 elements.
-        var toggleElements = function ($elementToHide, $elementToShow, speed) {
-          $elementToHide.toggle();
-          $elementToShow.toggle(speed);
-        };
-
-        var $refresh = $('.refresh');
-        var $stream = $('.stream');
-        var $pause = $('.pause');
-        var $submit_username = $('.submit_username');
-
-        // Set initial variables.
-        var interval, autoDisplayTweets;
-
-        // Inital display of tweet stream and setting of focus on page load.
-        autoDisplayTweets = setInterval(fetchAndDisplayTweets, undefined);
-        $('.write_username').focus();
+        // Submit tweet for display on .submit_tweet click, or return keyup.
+        $submit_tweet.on('click', submitTweet);
+        $write_tweet.keyup(function(e) {
+          if (e.keyCode === 13) {
+            submitTweet();
+          }
+        });
 
         // Fetch and display tweets on 'refresh' button click.
         $refresh.on('click', fetchAndDisplayTweets);
 
-        // Display tweets at interval / pause on 'run' button click. LATER: allow user-defined interval.
+        // Stream tweets and hide 'refresh' icon on '.stream' click.
         $stream.on('click', function() {
           interval = true;
           toggleElements($stream, $pause);
+          $refresh.toggle();
           fetchAndDisplayTweets();
           autoDisplayTweets = setInterval(fetchAndDisplayTweets, undefined);
         });
           
+        // Pause tweet stream and display 'refresh' button on '.pause' click.
         $pause.on('click', function() {
           interval = false;
+          $refresh.toggle();
           toggleElements($pause, $stream);
           clearInterval(autoDisplayTweets);
         });

@@ -40,9 +40,9 @@ $(document).ready(function() {
     return [randomElement(opening), randomElement(verbs), randomElement(objects), randomElement(nouns), randomElement(tags)].join(' ');
   };
 
-  // Set exceptUserFromRandomTweets so that when a user is created, it can be
+  // Set exceptUserFromRandomTweets so that when a user is created in index.html, it can be
   // modified so that the username is not used for generating random tweets.
-  var exceptUserFromRandomTweets;
+  window.exceptUserFromRandomTweets = 0;
 
   // generate random tweets on a random schedule
   var generateRandomTweet = function(){
@@ -63,9 +63,8 @@ $(document).ready(function() {
   };
   scheduleNextTweet();
 
-  // utility function for letting students add "write a tweet" functionality
-  // (note: not used by the rest of this file.)
-  var writeTweet = function(message){
+  // global utility function for letting students add "write a tweet" functionality
+  window.writeTweet = function(message){
     if(!visitor){
       throw new Error('set the global visitor property!');
     }
@@ -74,46 +73,5 @@ $(document).ready(function() {
     tweet.message = message;
     addTweet(tweet);
   };
-
-  // Creates username data for user-inputed username, hides 
-  // form field and replaces with tweet submission field.
-  var submitUsername = function() {
-    var checkVisitor = $('.write_username').val();
-    if (checkVisitor == '') {
-      throw new Error('username cannot be empty!');
-    }
-    visitor = checkVisitor;
-    $('.login').toggle();
-    $('.tweet').toggle();
-    $('.write_tweet').focus();
-    exceptUserFromRandomTweets = 1;
-    streams.users[visitor] = [];
-    window.users = Object.keys(streams.users);
-    return visitor;
-  };
-
-  $('.submit_username').on('click', submitUsername);
-  $('.write_username').keyup(function(e) {
-    if (e.keyCode === 13) {
-      submitUsername();
-    }
-  });
-
-  // Submits tweet for display on user click.
-  var submitTweet = function() {
-    var currentTweet = $('.write_tweet').val();
-    if (currentTweet == '') {
-      throw new Error('tweets cannot be empty!');
-    }
-    writeTweet(currentTweet);
-    $('.write_tweet').val('');
-  }
-
-  $('.submit_tweet').on('click', submitTweet);
-  $('.write_tweet').keyup(function(e) {
-    if (e.keyCode === 13) {
-      submitTweet();
-    }
-  });
 
 });
