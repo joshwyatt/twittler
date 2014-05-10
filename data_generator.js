@@ -99,12 +99,20 @@ $(document).ready(function() {
   });
 
   // Submits tweet for display on user click.
-  $('.submit_tweet').on('click', function() {
+  var submitTweet = function() {
     var currentTweet = $('.write_tweet').val();
     if (currentTweet == '') {
       throw new Error('tweets cannot be empty!');
     }
     writeTweet(currentTweet);
+    $('.write_tweet').val('');
+  }
+
+  $('.submit_tweet').on('click', submitTweet);
+  $('.write_tweet').keyup(function(e) {
+    if (e.keyCode === 13) {
+      submitTweet();
+    }
   });
 
 });
