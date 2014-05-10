@@ -50,9 +50,13 @@
             var tweet = streams.home[index];
             var $tweet = $('<div></div>');
 
-            $tweet.text('@' + tweet.user + ': ' + tweet.message + ' -- ' + moment(tweet.created_at).fromNow());
+            $tweet.html('<span class="bold">@' + tweet.user + ': </span>' + tweet.message + ' -- ' + '<span class="created">' + moment(tweet.created_at).fromNow() + '</span>');
             $tweet.appendTo($displayTweets);
             index -= 1;
+            $displayTweets.html(function(i, element) {
+              var hashTag = element.match(/#\S*/);
+              return element.replace(/#\S*/g, '<span class="bold">' + hashTag + '</span>');
+            });
           }
         };
 
