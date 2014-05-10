@@ -85,6 +85,7 @@ $(document).ready(function() {
     visitor = checkVisitor;
     $('.login').toggle();
     $('.tweet').toggle();
+    $('.write_tweet').focus();
     exceptUserFromRandomTweets = 1;
     streams.users[visitor] = [];
     window.users = Object.keys(streams.users);
