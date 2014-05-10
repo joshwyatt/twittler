@@ -59,7 +59,7 @@ $(document).ready(function() {
 
   var scheduleNextTweet = function(){
     generateRandomTweet();
-    setTimeout(scheduleNextTweet, Math.random() * 1500);
+    setTimeout(scheduleNextTweet, Math.random() * 5000);
   };
   scheduleNextTweet();
 
