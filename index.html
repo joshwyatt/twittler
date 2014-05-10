@@ -32,7 +32,7 @@
       </div>
     </div>
     
-    <div class="tweets">
+    <div class="displayTweets">
     </div>
 
     <script>
@@ -42,8 +42,8 @@
 
         // Function to fetch all tweets from data_generator.js and append them to $('.tweets').
         var fetchAndDisplayTweets = function() {
-          var $tweets = $('.tweets');
-          $tweets.html('');
+          var $displayTweets = $('.displayTweets');
+          $displayTweets.html('');
 
           var index = streams.home.length - 1;
           while(index >= 0){
@@ -51,7 +51,7 @@
             var $tweet = $('<div></div>');
 
             $tweet.text('@' + tweet.user + ': ' + tweet.message + ' -- ' + moment(tweet.created_at).fromNow());
-            $tweet.appendTo($tweets);
+            $tweet.appendTo($displayTweets);
             index -= 1;
           }
         };
