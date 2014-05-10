@@ -13,6 +13,13 @@ body {
 	text-shadow: 2px 2px 2px purple;
 }
 
+.owl {
+	position: absolute;
+	left: 25%;
+	top: 9px;
+
+}
+
 .tweet, .pause {
 	display: none;
 }
