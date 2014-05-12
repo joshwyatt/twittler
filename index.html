@@ -86,8 +86,8 @@
             $tweet.appendTo($displayTweets);
             index -= 1;
             $tweet.html(function(i, element) {
-              var hashTag = element.match(/\s#\S*/);
-              return element.replace(/\s#\S*/, '<span class="bold">' + hashTag + '</span>');
+              var hashTag = element.match(/#\S*/);
+              return element.replace(/#\S*/, '<span class="bold">' + hashTag + '</span>');
             });
           }
         };
