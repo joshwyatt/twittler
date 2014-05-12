@@ -176,12 +176,14 @@
         $displayTweets.on('mousedown', '.userHandle', function() {
           var selectedHandle = $(this).text();
           nameToDisplay = selectedHandle;
+          fetchAndDisplayTweets();
           $showAll.toggle('slow');
         });
 
         // Click on 'Show All Feeds' to show all feeds.
         $showAll.on('click', function() {
           nameToDisplay = 'home';
+          fetchAndDisplayTweets();
           $(this).toggle('slow');
         });
 
