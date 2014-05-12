@@ -28,6 +28,7 @@
           <input class="write_tweet" type="text" size="85"/>
           <i class="fa fa-plus-square fa-lg submit_tweet"></i>
         </span>
+        <span class="showAll">Show All</span>
       </div>
       <div class="controls">
         <i class="fa fa-refresh fa-2x refresh"></i>
@@ -61,6 +62,7 @@
         var $write_tweet = $('.write_tweet');
         var $write_username = $('.write_username');
         var $userHandle = $('.userHandle');
+        var $showAll = $('.showAll');
         var nameToDisplay = 'home';
         
         // Function to fetch all tweets from data_generator.js and append them to $('.tweets').
@@ -174,6 +176,13 @@
         $displayTweets.on('mousedown', '.userHandle', function() {
           var selectedHandle = $(this).text();
           nameToDisplay = selectedHandle;
+          $showAll.toggle('slow');
+        });
+
+        // Click on 'Show All Feeds' to show all feeds.
+        $showAll.on('click', function() {
+          nameToDisplay = 'home';
+          $(this).toggle('slow');
         });
 
       });

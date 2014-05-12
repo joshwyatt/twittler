@@ -41,6 +41,11 @@ body {
 	margin-left: 10px;
 }
 
+.showAll {
+	display: none;
+	margin-left: 50px;
+}
+
 .controls {
 	float: right;
 	margin-right: 30px;
