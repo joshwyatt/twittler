@@ -60,7 +60,8 @@
         var $submit_tweet = $('.submit_tweet');
         var $write_tweet = $('.write_tweet');
         var $write_username = $('.write_username');
-        var nameToDisplay = 'shawndrost';
+        var $userHandle = $('.userHandle');
+        var nameToDisplay = 'home';
         
         // Function to fetch all tweets from data_generator.js and append them to $('.tweets').
         var fetchAndDisplayTweets = function() {
@@ -79,12 +80,12 @@
             }
             var $tweet = $('<div></div>');
 
-            $tweet.html('<span class="bold">@' + tweet.user + ': </span>' + tweet.message + ' -- ' + '<span class="created">' + moment(tweet.created_at).fromNow() + '</span>');
+            $tweet.html('<span class="bold">@<span class="userHandle">' + tweet.user + '</span>: </span>' + tweet.message + ' -- ' + '<span class="created">' + moment(tweet.created_at).fromNow() + '</span>');
             $tweet.appendTo($displayTweets);
             index -= 1;
             $tweet.html(function(i, element) {
-              var hashTag = element.match(/#\S*/);
-              return element.replace(/#\S*/, '<span class="bold">' + hashTag + '</span>');
+              var hashTag = element.match(/\s#\S*/);
+              return element.replace(/\s#\S*/, '<span class="bold">' + hashTag + '</span>');
             });
           }
         };
@@ -167,6 +168,12 @@
           $refresh.toggle();
           toggleElements($pause, $stream);
           clearInterval(autoDisplayTweets);
+        });
+
+        // Click on user's name to show only their feeds.
+        $displayTweets.on('mousedown', '.userHandle', function() {
+          var selectedHandle = $(this).text();
+          nameToDisplay = selectedHandle;
         });
 
       });
